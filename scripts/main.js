@@ -139,7 +139,7 @@ function selectedItems() {
     para.innerHTML = "The total cost of your order is: ";
 
     var span = document.createElement("span");
-    span.innerHTML = "$" + getTotalPrice(chosenProducts);
+    span.innerHTML = "$" + getTotalPrice(chosenProducts).toFixed(2);
 
     para.appendChild(span);
     totalCost.appendChild(para);
