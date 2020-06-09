@@ -17,7 +17,7 @@ function openInfo(evt, tabName) {
 
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
+    document.getElementById(tabName + "Btn").className += " active";
 }
 
 // generate a checkbox list from a list of products
@@ -103,23 +103,45 @@ function selectedItems() {
     var ele = document.getElementsByName("product");
     var chosenProducts = [];
 
-    var c = document.getElementById('displayCart');
-    c.innerHTML = "";
+    var results = document.getElementById('resultsList');
+    results.innerHTML = "";
+    var totalCost = document.getElementById('totalCost');
+    totalCost.innerHTML = "";
 
-    // build list of selected item
-    var para = document.createElement("P");
-    para.innerHTML = "You selected : ";
-    para.appendChild(document.createElement("br"));
+    var div, label, image;
+
     for (i = 0; i < ele.length; i++) {
         if (ele[i].checked) {
-            para.appendChild(document.createTextNode(ele[i].value));
-            para.appendChild(document.createElement("br"));
+            div = document.createElement('div');
+            results.appendChild(div);
+
+            // create a label
+            label = document.createElement('label');
+            label.htmlFor = ele[i].value;
+            label.appendChild(document.createTextNode(ele[i].value));
+
+            // create an image for the checkbox
+            image = document.createElement('img');
+            image.src = "images/" + ele[i].value + ".jpg";
+            image.alt = ele[i].value;
+
+            div.appendChild(image);
+            div.appendChild(document.createElement("br"));
+            div.appendChild(label);
+
+            div.appendChild(document.createElement("br"));
             chosenProducts.push(ele[i].value);
         }
     }
 
     // add paragraph and total price
-    c.appendChild(para);
-    c.appendChild(document.createTextNode("Total Price is " + getTotalPrice(chosenProducts)));
+    var para = document.createElement("p");
+    para.innerHTML = "The total cost of your order is: ";
+
+    var span = document.createElement("span");
+    span.innerHTML = "$" + getTotalPrice(chosenProducts);
+
+    para.appendChild(span);
+    totalCost.appendChild(para);
 
 }

@@ -16,9 +16,9 @@
 
     <!-- Tab links, each one with an onclick event associated with it -->
     <div class="tab">
-        <button class="tablinks" onclick="openInfo(event, 'Client')">Dietary Preferences</button>
-        <button class="tablinks" onclick="openInfo(event, 'Products'); populateListProductChoices()">Products</button>
-        <button class="tablinks" onclick="openInfo(event, 'Cart')">Cart</button>
+        <button id="ClientBtn" class="tablinks" onclick="openInfo(event, 'Client')"><b>Step 1: </b>Dietary Preferences</button>
+        <button id="ProductsBtn" class="tablinks" onclick="openInfo(event, 'Products'); populateListProductChoices()"><b>Step 2: </b>Products</button>
+        <button id="CartBtn" class="tablinks" onclick="openInfo(event, 'Cart')"><b>Step 3: </b>View Your Cart</button>
     </div>
 
     <!-- Tab content -->
@@ -36,6 +36,8 @@
             <input type="checkbox" name="Organic" value="Organic" id="Organic" />
             <label>Organic</label><br>
         </div>
+
+        <button id="submitPrefs" class="btn-primary" onclick="openInfo(event, 'Products'); populateListProductChoices()">Save and go to next step</button>
     </div>
 
     <div id="Products" class="tabcontent column">
@@ -61,15 +63,18 @@
             <div id="other" class="panel category"></div>
 
         </div>
-        <button id="addCart" type="button" class="block" onclick="selectedItems()">
-			Add selected items to cart.
+        <button id="addCart" type="button" class="block btn-primary" onclick="selectedItems(); openInfo(event, 'Cart')">
+			Add selected items to cart and go to next step
 		</button>
     </div>
 
     <div id="Cart" class="tabcontent column">
         <h3>Cart</h3>
-        <p>Here are the items in your cart.</p>
-        <div id="displayCart"></div>
+        <p>Here are the items you have selected:</p>
+        <div id="displayCart">
+            <div id="resultsList"></div>
+            <div id="totalCost"></div>
+        </div>
     </div>
 
     <!-- This script is taken from https://www.w3schools.com/howto/howto_js_accordion.asp -->
@@ -77,7 +82,7 @@
         var acc = document.getElementsByClassName("accordion");
         var i;
 
-        for (i = 0; i < acc.length; i++) {
+        for (var i = 0; i < acc.length; i++) {
             acc[i].addEventListener("click", function() {
                 this.classList.toggle("active");
                 var panel = this.nextElementSibling;
@@ -95,7 +100,5 @@
 <footer>
     <p>Website designed by <b>Charita Koya</b></p>
 </footer>
-
-
 
 </html>

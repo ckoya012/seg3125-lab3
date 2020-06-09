@@ -105,7 +105,7 @@ html {
     margin: 1em 2em 1em;
 }
 
-#addCart {
+.btn-primary {
     color: #fff;
     background-color: #007bff;
     border-color: #007bff;
@@ -115,7 +115,7 @@ html {
     padding: 5px 10px;
 }
 
-#addCart:hover {
+.btn-primary:hover {
     color: #fff;
     background-color: #0069d9;
     border-color: #0062cc;
@@ -131,9 +131,22 @@ img {
 #dairy,
 #meat,
 #grains,
-#other {
+#other,
+#resultsList {
     text-align: center;
     flex-wrap: wrap;
+}
+
+#resultsList {
+    display: flex;
+    p {
+        margin: 0;
+    }
+}
+
+#displayCart p span {
+    font-size: 20px;
+    font-weight: 700;
 }
 
 
