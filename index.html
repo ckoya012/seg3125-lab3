@@ -2,66 +2,100 @@
 <html>
 
 <head>
-	<! This style sheet is taken from https://www.w3schools.com/howto/howto_js_tabs.asp>
-		<link href="styles/style.css" rel="stylesheet" type="text/css">
-		<script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
-		<script src="scripts/groceries.js"></script>
-		<script src="scripts/main.js"></script>
-		<title>Welcome to All-Star Groceries</title>
+    <!-- This style sheet is taken from https://www.w3schools.com/howto/howto_js_tabs.asp -->
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
+    <script src="scripts/groceries.js"></script>
+    <script src="scripts/main.js"></script>
+    <title>Welcome to All-Star Groceries</title>
 </head>
 
 <body>
 
-	<h1>All-Star Groceries</h1>
+    <h1>All-Star Groceries</h1>
 
-	<!-- Tab links, each one with an onclick event associated with it -->
-	<div class="tab">
-		<button class="tablinks" onclick="openInfo(event, 'Client')">Client</button>
-		<button class="tablinks" onclick="openInfo(event, 'Products')">Products</button>
-		<button class="tablinks" onclick="openInfo(event, 'Cart')">Cart</button>
-	</div>
+    <!-- Tab links, each one with an onclick event associated with it -->
+    <div class="tab">
+        <button class="tablinks" onclick="openInfo(event, 'Client')">Dietary Preferences</button>
+        <button class="tablinks" onclick="openInfo(event, 'Products'); populateListProductChoices()">Products</button>
+        <button class="tablinks" onclick="openInfo(event, 'Cart')">Cart</button>
+    </div>
 
-	<!-- Tab content -->
-	<div id="Client" class="tabcontent">
-		<h3>Client Information</h3>
-		<p>Tell us a bit about you.</p>
-		<b>Choose a Category:</b><br>
+    <!-- Tab content -->
+    <div id="Client" class="tabcontent column">
+        <h3>Your Dietary Information</h3>
+        <b>Please select your dietary preferences:</b><br>
 
-		<div id="dietSelect" onchange="populateListProductChoices()">
-			<input type="checkbox" name="Vegetarian" value="Vegetarian" id="Vegetarian">
-			<label>Vegetarian</label><br>
+        <div id="dietSelect">
+            <input type="checkbox" name="Vegetarian" value="Vegetarian" id="Vegetarian">
+            <label>Vegetarian</label><br>
 
-			<input type="checkbox" name="GlutenFree" value="GlutenFree" id="GlutenFree" />
-			<label>GlutenFree</label><br>
+            <input type="checkbox" name="GlutenFree" value="GlutenFree" id="GlutenFree" />
+            <label>GlutenFree</label><br>
 
-			<input type="checkbox" name="Organic" value="Organic" id="Organic" />
-			<label>Organic</label><br>
+            <input type="checkbox" name="Organic" value="Organic" id="Organic" />
+            <label>Organic</label><br>
+        </div>
+    </div>
 
-			<input type="checkbox" name="None" value="None" id="None" />
-			<label>None</label><br>
-		</div>
-	</div>
+    <div id="Products" class="tabcontent column">
+        <h3>Your targeted products</h3>
+        <p>We preselected products based on your dietary preferences.</p>
+        <!-- All images are taken from www.walmart.ca -->
+        Choose items to buy:
+        <div id="displayProduct">
 
-	<div id="Products" class="tabcontent">
-		<h3>Your targeted products</h3>
-		<p>We preselected products based on your restrictions.</p>
-		Choose items to buy:
-		<div id="displayProduct"></div>
-		<button id="addCart" type="button" class="block" onclick="selectedItems()">
+            <button class="accordion">Fruits and Vegetables</button>
+            <div id="vegFruits" class="panel category"></div>
+
+            <button class="accordion">Dairy Products</button>
+            <div id="dairy" class="panel category"></div>
+
+            <button class="accordion">Meat and Other Alternatives</button>
+            <div id="meat" class="panel category"></div>
+
+            <button class="accordion">Grains</button>
+            <div id="grains" class="panel category"></div>
+
+            <button class="accordion">Other</button>
+            <div id="other" class="panel category"></div>
+
+        </div>
+        <button id="addCart" type="button" class="block" onclick="selectedItems()">
 			Add selected items to cart.
 		</button>
-	</div>
+    </div>
 
-	<div id="Cart" class="tabcontent">
-		<h3>Cart</h3>
-		<p>Here is your cart.</p>
-		<div id="displayCart"></div>
-	</div>
+    <div id="Cart" class="tabcontent column">
+        <h3>Cart</h3>
+        <p>Here are the items in your cart.</p>
+        <div id="displayCart"></div>
+    </div>
 
+    <!-- This script is taken from https://www.w3schools.com/howto/howto_js_accordion.asp -->
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                console.log(panel);
+                if (panel.style.display === "flex") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "flex";
+                }
+            });
+        }
+    </script>
 </body>
 
 <footer>
-	<p>Website designed by <b>Charita Koya</b></p>
+    <p>Website designed by <b>Charita Koya</b></p>
 </footer>
+
+
 
 </html>
